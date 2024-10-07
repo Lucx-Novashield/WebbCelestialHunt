@@ -13,9 +13,9 @@ class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene' });
         this.onscreenImgs = [];
-        this.menuVisible = false;  // Control visibility of the menu
-        this.menu = null;          // Store reference to the menu
-        this.selectedObj = null;   // Store the currently selected object
+        this.menuVisible = false;  
+        this.menu = null;          
+        this.selectedObj = null;   
     }
 
     preload() {
@@ -32,7 +32,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        // Assign keys to this.<key> so they can be used in the update method
+        
         this.growKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         this.shrinkKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.eraseKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
@@ -50,56 +50,54 @@ class GameScene extends Phaser.Scene {
         const clouds = this.add.image(startX + imageWidth + spacing, yPosition, 'clouds1').setScale(0.3).setInteractive();
         const blackH = this.add.image(startX + (imageWidth + spacing) * 2, yPosition, 'blackH1').setScale(0.2).setInteractive();
     
-        // Create the secondary menu container for supernovas
+        
         this.secondaryMenuC1 = this.add.container(startX - 160, yPosition - 175);
         
         let secondaryBg1 = this.add.graphics();
-        secondaryBg1.fillStyle(0x000000, 1); // Light grey background
-        secondaryBg1.fillRect(0, 0, 300, 100); // Size of the secondary menu background
+        secondaryBg1.fillStyle(0x000000, 1); 
+        secondaryBg1.fillRect(0, 0, 300, 100); 
         this.secondaryMenuC1.add(secondaryBg1);
         
-        const s1 = this.add.image(50, 50, 'supernovas1').setScale(0.2).setInteractive();
-        const s2 = this.add.image(150, 50, 'supernovas2').setScale(0.03).setInteractive();
-        const s3 = this.add.image(250, 50, 'supernovas3').setScale(0.3).setInteractive();
+        const s1 = this.add.image(50, 50, 'supernovas1').setScale(0.1).setInteractive();
+        const s2 = this.add.image(150, 50, 'supernovas2').setScale(0.1).setInteractive();
+        const s3 = this.add.image(250, 50, 'supernovas3').setScale(0.1).setInteractive();
         
         this.secondaryMenuC1.add(s1);
         this.secondaryMenuC1.add(s2);
         this.secondaryMenuC1.add(s3);
-        this.secondaryMenuC1.setVisible(false); // Initially hide the secondary menu
-    
-        // Create the secondary menu container for clouds
+        this.secondaryMenuC1.setVisible(false); 
+        
         this.secondaryMenuC2 = this.add.container(startX - 160, yPosition - 175);
         
         let secondaryBg2 = this.add.graphics();
-        secondaryBg2.fillStyle(0x000000, 1); // Light grey background
-        secondaryBg2.fillRect(0, 0, 300, 100); // Size of the secondary menu background
+        secondaryBg2.fillStyle(0x000000, 1); 
+        secondaryBg2.fillRect(0, 0, 300, 100); 
         this.secondaryMenuC2.add(secondaryBg2);
         
-        const c1 = this.add.image(50, 50, 'clouds1').setScale(0.2).setInteractive();
-        const c2 = this.add.image(150, 50, 'clouds2').setScale(0.03).setInteractive();
-        const c3 = this.add.image(250, 50, 'clouds3').setScale(0.3).setInteractive();
+        const c1 = this.add.image(250, 50, 'clouds1').setScale(0.2).setInteractive();
+        const c2 = this.add.image(350, 50, 'clouds2').setScale(0.1).setInteractive();
+        const c3 = this.add.image(450, 50, 'clouds3').setScale(0.1).setInteractive();
         
         this.secondaryMenuC2.add(c1);
         this.secondaryMenuC2.add(c2);
         this.secondaryMenuC2.add(c3);
-        this.secondaryMenuC2.setVisible(false); // Initially hide the secondary menu
-    
-        // Create the secondary menu container for black holes
+        this.secondaryMenuC2.setVisible(false); 
+
         this.secondaryMenuC3 = this.add.container(startX - 160, yPosition - 175);
         
         let secondaryBg3 = this.add.graphics();
-        secondaryBg3.fillStyle(0x000000, 1); // Light grey background
-        secondaryBg3.fillRect(0, 0, 300, 100); // Size of the secondary menu background
+        secondaryBg3.fillStyle(0x000000, 1); 
+        secondaryBg3.fillRect(0, 0, 300, 100); 
         this.secondaryMenuC3.add(secondaryBg3);
         
-        const b1 = this.add.image(50, 50, 'blackH1').setScale(0.2).setInteractive();
-        const b2 = this.add.image(150, 50, 'blackH2').setScale(0.03).setInteractive();
-        const b3 = this.add.image(250, 50, 'blackH3').setScale(0.3).setInteractive();
+        const b1 = this.add.image(450, 50, 'blackH1').setScale(0.1).setInteractive();
+        const b2 = this.add.image(550, 50, 'blackH2').setScale(0.1).setInteractive();
+        const b3 = this.add.image(650, 50, 'blackH3').setScale(0.1).setInteractive();
         
         this.secondaryMenuC3.add(b1);
         this.secondaryMenuC3.add(b2);
         this.secondaryMenuC3.add(b3);
-        this.secondaryMenuC3.setVisible(false); // Initially hide the secondary menu
+        this.secondaryMenuC3.setVisible(false); 
     
         this.imageStorage = this.add.container(100, 100);  
     
@@ -107,16 +105,17 @@ class GameScene extends Phaser.Scene {
         supernovas.on('pointerdown', () => {
             this.menuVisible = !this.menuVisible;
             this.secondaryMenuC1.setVisible(this.menuVisible);
-            this.secondaryMenuC2.setVisible(false);  // Ensure the other menu is hidden
-            this.secondaryMenuC3.setVisible(false);  // Ensure the other menu is hidden
+            this.secondaryMenuC2.setVisible(false);  
+            this.secondaryMenuC3.setVisible(false);  
+
         });
     
         // Add event listener for clouds
         clouds.on('pointerdown', () => {
             this.menuVisible = !this.menuVisible;
             this.secondaryMenuC2.setVisible(this.menuVisible);
-            this.secondaryMenuC1.setVisible(false);  // Ensure the other menu is hidden
-            this.secondaryMenuC3.setVisible(false);  // Ensure the other menu is hidden
+            this.secondaryMenuC1.setVisible(false);  
+            this.secondaryMenuC3.setVisible(false);  
         });
     
         // Add event listener for black holes
@@ -148,6 +147,29 @@ class GameScene extends Phaser.Scene {
             if (this.selectedObj && !currentlyOver.includes(this.selectedObj)) {
                 this.deselectObject();
             }
+        });
+        const winB = this.add.text(sizes.width - 100, sizes.height - 100, 'Finish', {
+            fontSize: '26px',
+            fontFamily: 'Orbitron',
+            color: 'white',
+            backgroundColor: '#A12568',
+            padding: { left: 20, right: 20, top: 10, bottom: 10 }
+        }).setInteractive();
+        winB.setOrigin(0.5);
+        
+        // hover effect
+        winB.on('pointerover', () => {
+            winB.setStyle({ backgroundColor: '#FEC260' });
+        });
+        
+        winB.on('pointerout', () => {
+            winB.setStyle({ backgroundColor: '#A12568 ' });
+        });
+        
+        // fade-out and redirect
+        winB.on('pointerdown', () => {
+            this.scene.stop('GameScene');
+            this.scene.start('FinalScene');
         });
     }
 
@@ -204,6 +226,130 @@ class GameScene extends Phaser.Scene {
     }
 }
 
+class StartScene extends Phaser.Scene{
+    constructor(){
+      super('StartScene');
+    }
+  
+    preload(){
+      this.load.image('start-bg', '/images/bg.png');
+    }
+  
+    create() {
+      //fade in
+      this.cameras.main.fadeIn(1000);
+  
+      this.add.image(sizes.width / 2, sizes.height / 2, 'start-bg').setOrigin(0.5);
+  
+      const bg2 = this.add.rectangle(750, 350, 600, 400, 0X2A0944, 0.5);
+      bg2.setOrigin(0.5); 
+  
+      const levelText = this.add.text(750, 220, 'Level 3', {
+        fontSize: '32px',
+        color: '#FEC260',
+        fontFamily: 'Orbitron',
+        fontWeight: 500
+      });
+      levelText.setOrigin(0.5); 
+  
+    const instructionsText = this.add.text(475, 300, "The James Webb telescope has endless possibilities. Create a possible image of the James Webb, with different elements and objects ", {
+      fontSize: '26px',
+      color: '#ffffff',
+      fontFamily: 'Exo2',
+      wordWrap: { width: 575, useAdvancedWrap: true }, 
+      align: 'center', 
+    })
+  
+      const startB = this.add.text(750, 450, 'Start', {
+        fontSize: '26px',
+        fontFamily: 'Orbitron',
+        color: 'white',
+        backgroundColor: '#A12568 ',
+        padding: { left: 20, right: 20, top: 10, bottom: 10 }
+      }).setInteractive();
+      startB.setOrigin(0.5); 
+  
+      //hover effect
+      startB.on('pointerover', () => {
+        startB.setStyle({ backgroundColor: '#FEC260' }); 
+      });
+  
+      startB.on('pointerout', () => {
+        startB.setStyle({ backgroundColor: '#A12568 ' }); 
+      });
+  
+      //fade-out
+      startB.on('pointerdown', () => {
+            // Redirigir a localhost cuando el botón es presionado
+            this.scene.stop('StartScene');
+            this.scene.start('GameScene');
+        });
+        
+      }
+  
+    }
+
+class FinalScene extends Phaser.Scene{
+    constructor(){
+      super('FinalScene');
+    }
+  
+    preload(){
+      this.load.image('start-bg', '/images/bg.png');
+    }
+  
+    create() {
+      //fade in
+      this.cameras.main.fadeIn(1000);
+  
+      this.add.image(sizes.width / 2, sizes.height / 2, 'start-bg').setOrigin(0.5);
+  
+      const bg2 = this.add.rectangle(750, 350, 600, 400, 0X2A0944, 0.5);
+      bg2.setOrigin(0.5); 
+  
+      const levelText = this.add.text(750, 220, 'Congratulations!', {
+        fontSize: '32px',
+        color: '#FEC260',
+        fontFamily: 'Orbitron',
+        fontWeight: 500
+      });
+      levelText.setOrigin(0.5); 
+  
+    const instructionsText = this.add.text(475, 300, "Even though the image you've created is not real, this just demonstrates that possibilities are endless. Who knows if we will ever find a similar galaxy? ", {
+      fontSize: '26px',
+      color: '#ffffff',
+      fontFamily: 'Exo2',
+      wordWrap: { width: 575, useAdvancedWrap: true }, 
+      align: 'center', 
+    })
+  
+      const startB = this.add.text(750, 450, 'Back to homescreen', {
+        fontSize: '26px',
+        fontFamily: 'Orbitron',
+        color: 'white',
+        backgroundColor: '#A12568 ',
+        padding: { left: 20, right: 20, top: 10, bottom: 10 }
+      }).setInteractive();
+      startB.setOrigin(0.5); 
+  
+      //hover effect
+      startB.on('pointerover', () => {
+        startB.setStyle({ backgroundColor: '#FEC260' }); 
+      });
+  
+      startB.on('pointerout', () => {
+        startB.setStyle({ backgroundColor: '#A12568 ' }); 
+      });
+  
+      //fade-out
+      startB.on('pointerdown', () => {
+            // Redirigir a localhost cuando el botón es presionado
+            window.location.href = 'http://localhost:3000';
+        });
+        
+      }
+  
+    }
 const config = {
   type: Phaser.WEBGL,
   width: sizes.width,
@@ -215,7 +361,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [GameScene] // StartScene is now the first scene
+  scene: [StartScene, GameScene, FinalScene] // StartScene is now the first scene
 };
 
 const game = new Phaser.Game(config);

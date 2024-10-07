@@ -262,7 +262,7 @@ class StartScene extends Phaser.Scene{
     const bg2 = this.add.rectangle(750, 350, 600, 400, 0X2A0944, 0.5);
     bg2.setOrigin(0.5); 
 
-    const levelText = this.add.text(750, 200, 'Nivel 1', {
+    const levelText = this.add.text(750, 200, 'Level 1', {
       fontSize: '32px',
       color: '#FEC260',
       fontFamily: 'Orbitron',
@@ -270,7 +270,7 @@ class StartScene extends Phaser.Scene{
     });
     levelText.setOrigin(0.5); 
 
-  const instructionsText = this.add.text(475, 240, "En lo profundo del cosmos, existe un rincón dónde las estrellas danzan al unísono creando una sinfonía de luz: SMACS0723. Tú, como viajero cósmico, estás a punto de formar parte de una orquesta galáctica, donde cada estrella cuenta una historia y cada sonido guarda un secreto por revelar. Como jugador, debes memorizar sonidos siguiendo el ritmo correcto, para desbloquear nuevos niveles. ¡Suerte!", {
+  const instructionsText = this.add.text(475, 240, "Follow the sounds and press the buttons in the right rhythms to load new levels. Good luck!", {
     fontSize: '24px',
     color: '#ffffff',
     fontFamily: 'Exo',
@@ -278,7 +278,7 @@ class StartScene extends Phaser.Scene{
     align: 'center', 
   })
 
-    const startB = this.add.text(750, 500, 'Empezar', {
+    const startB = this.add.text(750, 500, 'Start', {
       fontSize: '26px',
       fontFamily: 'Orbitron',
       color: 'white',
@@ -326,14 +326,14 @@ class LoseScene extends Phaser.Scene {
     const bg2 = this.add.rectangle(750, 300, 500, 400, 0x2A0944, 0.5);
     bg2.setOrigin(0.5); 
 
-    const gameOverText = this.add.text(750, 250, "¡Secuencia incorrecta!", {
+    const gameOverText = this.add.text(750, 250, "Incorrect", {
       fontSize: '32px',
       fontFamily: 'Orbitron',
       color: '#FEC260'
     });
     gameOverText.setOrigin(0.5); 
 
-    const restartB = this.add.text(750, 350, 'Reintentar', {
+    const restartB = this.add.text(750, 350, 'Restart', {
       fontSize: '24px',
       color: '#ffffff',
       fontFamily: 'Orbitron',
@@ -394,6 +394,7 @@ class WinScene extends Phaser.Scene {
         this.dialogueText = this.add.text(60, this.cameras.main.height - 140, '', {
             fontSize: '32px',
             fill: '#ffffff',
+            fontFamily: "Exo2",
             wordWrap: { width: this.cameras.main.width - 120 } // Wrap text inside the box
         });
   
@@ -513,7 +514,7 @@ const config = {
         debug: false,
       },
     },
-    scene: [ StartScene, GameScene, LoseScene, WinScene, WinScene2,] // StartScene is now the first scene
+    scene: [ StartScene, GameScene, LoseScene, WinScene] // StartScene is now the first scene
   };
 
 const game = new Phaser.Game(config);

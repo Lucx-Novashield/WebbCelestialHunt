@@ -38,7 +38,7 @@ class VideoScene extends Phaser.Scene {
     // Listen for video completion
     video.on('complete', () => {
         console.log('Video finished playing');
-        window.location.href = 'https://your-url-here.com'; // Replace with your desired URL
+        window.location.href = 'http://localhost:3002/'; // Replace with your desired URL
     });
 }
 }

@@ -131,75 +131,77 @@ class GameScene extends Phaser.Scene {
 
 class WinScene extends Phaser.Scene {
   constructor() {
-    super("WinScene");
+      super({ key: 'WinScene' });
+      this.dialogueBox = null;
+      this.dialogueText = null;
+      this.currentDialogueIndex = 0;
+      this.dialogue = [
+        "L1527 harbors a protostar in the neck of its hourglass-shaped structure, which is located approximately 460 light-years from Earth.", 
+        "Thanks to the technology of the James Webb Space Telescope, the clouds are now an ideal target for NIRCam, its near-infrared camera.",
+         "The photo from the James Webb Space Telescope has revealed details of protostar births, showing a protoplanetary disk and a small sphere of hot gas with between 20% and 40% of the mass of the Sun."
+      ];
+      this.typingInterval = 20; // Time in milliseconds between characters
+      this.isTyping = false; // To check if dialogue is currently being typed
   }
 
-  preload() {
-    this.load.image('star', '/images/star.jpg'); // Background image
+  preload(){
+    this.load.image('star', '/images/star.jpg');
+
   }
 
   create() {
     this.add.image(0, 0, 'star').setOrigin(0, 0).setDisplaySize(sizes.width, sizes.height);
-
-    // Function to create an interactive circle
-    const createCircle = (x, y, radius, color) => {
-      const circle = this.add.graphics();
-      circle.fillStyle(color, 1);
-      circle.fillCircle(x, y, radius);
-
-      const hitArea = new Phaser.Geom.Circle(x, y, radius);
-      circle.setInteractive(hitArea, Phaser.Geom.Circle.Contains);
-
-      return circle;
-    };
-
-    // Create two interactive circles
-    const circle1 = createCircle(200, 200, 15, 0xFF0000); // Red circle
-    const circle2 = createCircle(400, 300, 15, 0x0000FF); // Blue circle
-
-    // Create a hidden textbox (rectangle with text)
-    const textbox = this.add.rectangle(750, 400, 400, 200, 0x000000, 0.8).setVisible(false); // Black transparent background
-    const titleText = this.add.text(750, 350, '', {
-      fontSize: '24px',
-      color: '#ffffff',
-      fontFamily: 'Orbitron',
-      align: 'center',
-    }).setOrigin(0.5).setVisible(false);
-
-    const paragraphText = this.add.text(750, 400, '', {
-      fontSize: '18px',
-      color: '#ffffff',
-      fontFamily: 'Exo',
-      wordWrap: { width: 380, useAdvancedWrap: true },
-      align: 'center',
-    }).setOrigin(0.5).setVisible(false);
-
-    // Function to show the textbox when a circle is clicked
-    const showTextbox = (title, paragraph) => {
-      textbox.setVisible(true);
-      titleText.setText(title).setVisible(true);
-      paragraphText.setText(paragraph).setVisible(true);
-    };
-
-    // Add click events for the circles
-    circle1.on('pointerdown', () => {
-      showTextbox('Circle 1 Title', 'This is the paragraph text for Circle 1.');
-    });
-
-    circle2.on('pointerdown', () => {
-      showTextbox('Circle 2 Title', 'This is the paragraph text for Circle 2.');
-    });
-
-    // Optional: close the textbox when clicking outside
-    this.input.on('pointerdown', (pointer, gameObject) => {
-      if (gameObject.length === 0) {
-        textbox.setVisible(false);
-        titleText.setVisible(false);
-        paragraphText.setVisible(false);
-      }
-    });
+    this.dialogueBox = this.add.graphics();
+        this.dialogueBox.fillStyle(0x000000, 0.5); // Semi-transparent black
+        this.dialogueBox.fillRect(20, this.cameras.main.height - 150, this.cameras.main.width - 100, 100); // Position and size
+  
+        // Create text object for the dialogue
+        this.dialogueText = this.add.text(60, this.cameras.main.height - 140, '', {
+            fontSize: '32px',
+            fill: '#ffffff',
+            fontFamily: 'Orbitron',
+            wordWrap: { width: this.cameras.main.width - 120 } // Wrap text inside the box
+        });
+  
+        // Start typing the dialogue
+        this.typeDialogue();
+    }
+  
+    typeDialogue() {
+        if (this.currentDialogueIndex < this.dialogue.length) {
+            this.isTyping = true;
+            this.dialogueText.setText(''); // Clear previous text
+            this.typeCharacter(this.dialogue[this.currentDialogueIndex], 0);
+        }
+    }
+  
+    typeCharacter(text, charIndex) {
+        if (charIndex < text.length) {
+            this.dialogueText.setText(this.dialogueText.text + text[charIndex]);
+            this.time.delayedCall(this.typingInterval, () => {
+                this.typeCharacter(text, charIndex + 1);
+            });
+        } else {
+            // Dialogue finished typing, prepare to go to WinScene2
+            this.isTyping = false;
+            this.currentDialogueIndex++;
+  
+            if (this.currentDialogueIndex < this.dialogue.length) {
+                // Add a click event to move to the next dialogue
+                this.input.once('pointerdown', () => {
+                    this.typeDialogue(); // Start typing the next dialogue
+                });
+            } else {
+                // Last dialogue finished, transition to WinScene2
+                this.time.delayedCall(1000, () => {
+                    this.scene.start('WinScene2'); // Start the WinScene2 after a delay
+                });
+            }
+        }
+    }
+  
   }
-}
+
 
 class StartScene extends Phaser.Scene{
   constructor(){
@@ -217,7 +219,7 @@ class StartScene extends Phaser.Scene{
     this.add.image(sizes.width / 2, sizes.height / 2, 'start-bg').setOrigin(0.5);
 
 
-    const levelText = this.add.text(750, 250, 'Nivel 2', {
+    const levelText = this.add.text(750, 250, 'Level 2', {
       fontSize: '32px',
       color: '#FEC260',
       fontFamily: 'Orbitron',
@@ -225,7 +227,7 @@ class StartScene extends Phaser.Scene{
     });
     levelText.setOrigin(0.5); 
 
-  const instructionsText = this.add.text(525, 300, "Maneja tu nave por el espacio y recolecta 3 átomos de hidrógeno de cada color para ganar. ¡No te choques!", {
+  const instructionsText = this.add.text(525, 300, "Drive your spaceship avoiding the asteroids and collecting three particles of hydrogen of each color.", {
     fontSize: '26px',
     color: '#ffffff',
     fontFamily: 'Exo',
@@ -315,6 +317,110 @@ class LoseScene extends Phaser.Scene {
   }
 }
 
+class WinScene2 extends Phaser.Scene {
+  constructor() {
+      super({ key: 'WinScene2' });
+      
+      // Textbox elements (hidden by default)
+      this.textbox = null;
+      this.titleText = null;
+      this.bodyText = null;
+  }
+
+  preload() {
+      this.load.image('star', '/images/star.jpg');
+  }
+
+  create() {
+    this.add.image(0, 0, 'star').setOrigin(0, 0).setDisplaySize(sizes.width, sizes.height);
+    this.dialogueBox = this.add.graphics();
+    this.instructions = this.add.text(400, 250, 'Click on the dots to learn more!', { fontSize: '32px', color: '#ffffff' }).setOrigin(0.5).setVisible(false);
+
+    // Create circles that open textboxes
+    this.createCircle(758, 360, 'L1527 Star', 'This class corresponds to the earliest stage of star formation, and they are surrounded by dark clouds of dust and gas', 0xfcba03);
+    this.createCircle(746, 280, 'Nebulous 1', 'The layers of dust between the Webb telescope and the clouds filter the light, where the denser dust blocks blue light, creating orange bubbles..', 0xfcba03);
+    this.createCircle(774, 440, 'Nebulous 2', 'As matter falls into the center of the protostar, it spirals around the core.', 0xfcba03);
+
+    // Create the textbox (hidden by default)
+    this.createTextbox();
+
+    const winB = this.add.text(sizes.width - 100, sizes.height - 100, 'Finish', {
+        fontSize: '26px',
+        fontFamily: 'Orbitron',
+        color: 'white',
+        backgroundColor: '#A12568',
+        padding: { left: 20, right: 20, top: 10, bottom: 10 }
+    }).setInteractive();
+    winB.setOrigin(0.5);
+    
+    // hover effect
+    winB.on('pointerover', () => {
+        winB.setStyle({ backgroundColor: '#FEC260' });
+    });
+    
+    winB.on('pointerout', () => {
+        winB.setStyle({ backgroundColor: '#A12568 ' });
+    });
+    
+    // fade-out and redirect
+    winB.on('pointerdown', () => {
+      window.location.href = 'http://localhost:3000';
+    });
+
+    // Add global input listener to close the textbox when clicking outside of it
+    this.input.on('pointerdown', (pointer) => {
+        if (this.textbox.visible) {
+            // Check if the click is outside the textbox
+            if (!this.textbox.getBounds().contains(pointer.x, pointer.y)) {
+                this.closeTextbox();
+            }
+        }
+    });
+}
+
+createCircle(x, y, title, paragraph, color) {
+    const circle = this.add.circle(x, y, 10, color).setInteractive();
+
+    // Add click event to the circle
+    circle.on('pointerdown', () => {
+        this.openTextbox(title, paragraph, x, y);  // Pass circle's position to openTextbox
+    });
+}
+
+createTextbox() {
+    this.textbox = this.add.rectangle(0, 0, 400, 200, 0xA12568, 0.7).setOrigin(0.5).setVisible(false);
+    this.titleText = this.add.text(0, 0, '', { fontSize: '17px', color: '#000000', fontFamily: 'Orbitron'}).setOrigin(0.5).setVisible(false);
+    this.bodyText = this.add.text(0, 0, '', { fontSize: '15px', color: '#00000', wordWrap: { width: 380 }, fontFamily: 'Orbitron' }).setOrigin(0.5).setVisible(false);
+
+    // Close button (optional)
+
+}
+
+openTextbox(title, paragraph, x, y) {
+    // Adjust the position of the textbox next to the circle
+    const textboxX = x + 100;  // You can adjust the offset as needed
+    const textboxY = y;
+
+    // Set textbox position and make it visible
+    this.textbox.setPosition(textboxX, textboxY).setVisible(true);
+    this.titleText.setPosition(textboxX, textboxY - 45).setText(title).setVisible(true);
+    this.bodyText.setPosition(textboxX, textboxY).setText(paragraph).setVisible(true);
+    this.closeButton.setPosition(textboxX + 180, textboxY - 80).setVisible(true);  // Adjust close button position
+}
+
+closeTextbox() {
+    this.textbox.setVisible(false);
+    this.titleText.setVisible(false);
+    this.bodyText.setVisible(false);
+    this.closeButton.setVisible(false);
+}
+
+update() {
+    // Any update logic goes here
+}
+
+}
+
 const config = {
   type: Phaser.WEBGL,
   width: sizes.width,
@@ -326,7 +432,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [WinScene, StartScene, GameScene, LoseScene], 
+  scene: [  StartScene, GameScene,  LoseScene, WinScene, WinScene2 ], 
 };
 
 const game = new Phaser.Game(config);

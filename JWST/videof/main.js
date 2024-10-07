@@ -66,7 +66,7 @@ class NextScene extends Phaser.Scene {
         debug: true,
       },
     },
-  scene: [VideoScene, NextScene], // Include both scenes in the game
+  scene: [VideoScene], // Include both scenes in the game
 };
 
 // Initialize the game

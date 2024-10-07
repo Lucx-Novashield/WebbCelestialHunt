@@ -137,7 +137,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center; /* Centra el título horizontalmente */
-  color: black; /* Asegúrate de que el texto sea visible sobre el fondo */
+  color: #FEC260; /* Asegúrate de que el texto sea visible sobre el fondo */
   position: relative;
   z-index: 1; /* Asegura que el título esté por encima de otros elementos si es necesario */
 }
