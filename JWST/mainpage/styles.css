@@ -1,0 +1,129 @@
+
+.orbitron {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: "orbitron", sans-serif;
+    margin: 0;
+}
+
+#first {
+    background-image: url("images/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#container {
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 20px;
+    color: white;
+    background-color: #2A0944;
+    opacity: 70%;
+}
+
+.jamesWebbtitle {
+    font-size: 30px;
+    opacity: 100%;
+}
+
+.header1 {
+    color: #bb9ed0d8;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.image-container .telescopeH {
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.image-container:hover .telescopeH {
+    transform: scale(1.2); /* Enlarges the image */
+    filter: grayscale(100%) sepia(100%) hue-rotate(180deg); /* Changes the color */
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.image-container:hover .overlay-text {
+    opacity: 1; /* Shows the text on hover */
+}
+
+/* Ensure there's no background on the text */
+.overlay-text {
+    background-color: transparent;
+    font-family: orbitron, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease 0s;
+    background-color: transparent;
+    color: rgb(254, 194, 96);
+    font-weight: 700;
+}
+
+.telescopeH {
+    height: 600px;
+}
+
+.particles1, .particles2 {
+    height: 400px;
+}
+#container2{
+    font-family: orbitron, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(42, 9, 68);
+    padding: 50px;
+}
+.txtcontainer{
+    font-family: orbitron, sans-serif;
+    max-width: 600px;
+    font-size: 24px;
+    color: rgba(241, 226, 248, 0.937);
+}
+
+.title2{
+    font-family: orbitron, sans-serif;
+    font-weight: 500;
+    color: rgb(254, 194, 96);
+}
+
+.info{
+    font-family: orbitron, sans-serif;
+    font-size: 24px;
+    color: rgba(241, 226, 248, 0.937);
+}

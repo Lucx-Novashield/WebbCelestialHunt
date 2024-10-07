@@ -1,0 +1,16 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+}
+
+body {
+  font-family: 'Ontario', sans-serif;
+}
+
+#game-container {
+  font-family: 'Ontario', sans-serif;
+}

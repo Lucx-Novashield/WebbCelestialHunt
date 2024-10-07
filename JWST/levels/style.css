@@ -1,0 +1,193 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.orbitron {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "orbitron", sans-serif;
+  margin: 0;
+}
+
+body{
+  margin: 0;
+  margin: 0;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+#nivelesbg{
+  position: absolute; /* Position it behind other elements */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0; /* Behind gameUI elements */
+}
+#nvls{
+  display:none;
+}
+#nvlscont{
+  margin: 10vh;
+  margin-top: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-template-rows: 35 vh 35 vh;
+}
+#nvlscont h2{
+  transform: perspective(1px) translateZ(0);
+}
+
+#nvlscont div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* To center the text */
+}
+
+#nvlscont img {
+  max-height: 175px;
+  transition: filter 0.3s ease;
+  margin-bottom: 10px; /* Adds space between image and heading */
+}
+
+#nvlscont h2 {
+  font-size: 15px;
+  margin: 0; /* Removes default margin from headings */
+}
+
+#one{
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+#two{
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+#three{
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+#four{
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+#nvlscont img{
+  max-height: 175px;
+  transition: filter 0.3s ease;
+}
+#nvlscont h2{
+  font-size: 15px;
+}
+
+
+#one:hover img{
+  filter: sepia(1) saturate(1000%) hue-rotate(270deg);
+}
+
+
+#two:hover img{
+  filter: sepia(1) saturate(1000%) hue-rotate(270deg);
+}
+
+
+#three:hover img{
+  filter: sepia(1) saturate(1000%) hue-rotate(270deg);
+}
+
+#four:hover img{
+  filter: sepia(1) saturate(1000%) hue-rotate(270deg);
+}
+
+#nivelesbg {
+  background-image: url("imagenes/niveles/fondo.jpg");
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Hace que el div cubra toda la altura de la ventana */
+  width: 100vw;  /* Hace que el div cubra todo el ancho de la ventana */
+  margin: 0;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el título horizontalmente */
+  color: black; /* Asegúrate de que el texto sea visible sobre el fondo */
+  position: relative;
+  z-index: 1; /* Asegura que el título esté por encima de otros elementos si es necesario */
+}
+
+#inventPag {
+  position: relative;
+  z-index: 1; /* Asegura que el contenido de inventPag esté por encima del fondo */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+}
+
+/* Popup content */
+.popup-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  text-align: center;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+.gameUI{
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}

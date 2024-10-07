@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de enlazar tu CSS -->
+  <script>
+    // Function to navigate to a specific level
+    function goToLevel(levelNumber) {
+        window.location.href = `../level${levelNumber}/index.html`; // Redirect to the chosen level
+    }
+</script>
+</head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+  </style>
+  <div id="nivelesbg">
+    <div id="title">
+      <h1>Niveles</h1>
+    </div>
+    <div id="inventPag">
+      <button id="inventario">Open Popup</button>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="closePopupBtn" class="close">&times;</span>
+          <p>Inventario</p>
+        </div>
+      </div>
+    </div>
+    <div id="nvlscont">
+      <div id="one">
+        <a href="http://localhost:3001/">
+          <img src="imagenes/niveles/one.png"/>
+          <h2>Comienzo del universo</h2>
+        </a>
+      </div>
+      <div id="two">
+        <a href="http://localhost:3002/">
+          <img src="imagenes/niveles/two.png"/>
+          <h2>Nacimiento de una estrella</h2>
+        </a>
+      </div>
+      <div id="three">
+        <img src="imagenes/niveles/three.png"/>
+        <h2>Pilares del universo</h2>
+      </div>
+      <div id="four">
+        <a href="../nivel1/index.html">
+          <img src="imagenes/niveles/four.png"/>
+          <h2>Comienzo del universo</h2>
+        </a>
+
+      </div>
+    </div>
+  </div>
+  <div id="nvls">
+    <canvas id="nvl1" class="gameUI"></canvas>
+    <canvas id="nvl2" class="gameUI"></canvas>
+    <canvas id="nvl3" class="gameUI"></canvas>
+    <canvas id="nvl4" class="gameUI"></canvas>
+  </div>
+
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
